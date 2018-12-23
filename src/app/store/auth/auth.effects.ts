@@ -4,11 +4,11 @@ import { Actions, Effect, ofType } from "@ngrx/effects";
 import { Observable, of } from "rxjs";
 import { mergeMap, map, catchError } from "rxjs/operators";
 import { Action } from "@ngrx/store";
-import * as Login from "./login.actions";
+import * as Auth from "./auth.actions";
 import { UserModel } from "src/app/models/user.model";
 
 @Injectable()
-export class LoginEffects {
+export class AuthEffects {
 
   constructor(
     private http: HttpClient,
@@ -17,14 +17,14 @@ export class LoginEffects {
 
   @Effect()
   login$: Observable<Action> = this.actions$.pipe(
-    ofType(Login.ActionTypes.INIT),
+    ofType(Auth.ActionTypes.INIT),
     mergeMap((action: any) => {
       return this.http.get('https://jsonplaceholder.typicode.com/users').pipe(
         map((data: any) => {
           const user = data.find((user: UserModel) => user.username === action.payload.username);
-          return user ? new Login.LoginSuccess(user) : new Login.LoginFailed({ error: 'User not found' });
+          return user ? new Auth.LoginSuccess(user) : new Auth.LoginFailed({ error: 'User not found' });
         }),
-        catchError(() => of(new Login.LoginFailed({ error: 'Something went wrong' })))
+        catchError(() => of(new Auth.LoginFailed({ error: 'Something went wrong' })))
       )
     })
   )

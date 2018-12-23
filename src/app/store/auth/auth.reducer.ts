@@ -1,4 +1,4 @@
-import * as Login from './login.actions';
+import * as Auth from './auth.actions';
 import { UserModel } from 'src/app/models/user.model';
 
 export interface State {
@@ -13,16 +13,16 @@ export const initialState: State = {
   userData: null
 };
 
-export function LoginReducer(state = initialState, action: Login.ActionsUnion) {
+export function AuthReducer(state = initialState, action: Auth.ActionsUnion) {
   const { type } = action;
   switch (type) {
-    case Login.ActionTypes.INIT:
+    case Auth.ActionTypes.INIT:
       return {
         ...state,
         loading: true
       };
 
-    case Login.ActionTypes.SUCCESS:
+    case Auth.ActionTypes.SUCCESS:
       return {
         ...state,
         loading: false,
@@ -30,7 +30,7 @@ export function LoginReducer(state = initialState, action: Login.ActionsUnion) {
         userData: action['payload']
       }
 
-    case Login.ActionTypes.FAILED:
+    case Auth.ActionTypes.FAILED:
       return {
         ...state,
         loading: false,
@@ -38,7 +38,7 @@ export function LoginReducer(state = initialState, action: Login.ActionsUnion) {
         userData: null
       }
 
-    case Login.ActionTypes.LOGOUT:
+    case Auth.ActionTypes.LOGOUT:
       return initialState;
 
     default:

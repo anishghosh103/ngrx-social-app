@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { LoginInitiate, Logout } from 'src/app/store/login/login.actions';
+import { LoginInitiate, Logout } from 'src/app/store/auth/auth.actions';
 import { Observable } from 'rxjs';
 import { UserModel } from 'src/app/models/user.model';
 
@@ -22,9 +22,9 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loading$ = this.store.select('login', 'loading');
-    this.loggedIn$ = this.store.select('login', 'loggedIn');
-    this.userData$ = this.store.select('login', 'userData');
+    this.loading$ = this.store.select('auth', 'loading');
+    this.loggedIn$ = this.store.select('auth', 'loggedIn');
+    this.userData$ = this.store.select('auth', 'userData');
   }
 
   login() {

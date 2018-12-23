@@ -7,7 +7,7 @@ import { SharedModule } from './modules/shared/shared.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginReducer, LoginEffects } from './store/login';
+import { AuthReducer, AuthEffects } from './store/auth';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -20,10 +20,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     AppRoutingModule,
     StoreModule.forRoot({
-      login: LoginReducer
+      auth: AuthReducer
     }),
     EffectsModule.forRoot([
-      LoginEffects
+      AuthEffects
     ]),
     SharedModule
   ],
