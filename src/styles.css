@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+
+.screen-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.auth-form {
+  width: 200px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}

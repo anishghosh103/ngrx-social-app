@@ -1,0 +1,18 @@
+<div class="screen-center">
+  <form class="auth-form" *ngIf="!(loggedIn$ | async)">
+    <mat-form-field class="w-100">
+      <input matInput placeholder="Username" name="username" [(ngModel)]="username" required>
+    </mat-form-field>
+    <button mat-flat-button color="primary" class="w-100" *ngIf="!(loading$ | async)" [disabled]="!username" (click)="login()">
+      Login
+    </button>
+    <div class="w-100 d-flex justify-content-center">
+      <mat-spinner *ngIf="(loading$ | async)" diameter="36"></mat-spinner>
+    </div>
+  </form>
+
+  <div *ngIf="userData$ | async as user" class="text-center">
+    Hi, {{ user.name }}
+    <button mat-flat-button color="warn" class="w-100" (click)="logout()">Logout</button>
+  </div>
+</div>
