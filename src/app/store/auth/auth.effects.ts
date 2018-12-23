@@ -17,12 +17,25 @@ export class AuthEffects {
 
   @Effect()
   login$: Observable<Action> = this.actions$.pipe(
-    ofType(Auth.ActionTypes.INIT),
+    ofType(Auth.ActionTypes.LOGIN_INIT),
     mergeMap((action: any) => {
       return this.http.get('https://jsonplaceholder.typicode.com/users').pipe(
         map((data: any) => {
           const user = data.find((user: UserModel) => user.username === action.payload.username);
           return user ? new Auth.LoginSuccess(user) : new Auth.LoginFailed({ error: 'User not found' });
+        }),
+        catchError(() => of(new Auth.LoginFailed({ error: 'Something went wrong' })))
+      )
+    })
+  )
+
+  @Effect()
+  signup$: Observable<Action> = this.actions$.pipe(
+    ofType(Auth.ActionTypes.SIGNUP_INIT),
+    mergeMap((action: any) => {
+      return this.http.post('https://jsonplaceholder.typicode.com/users', action.payload).pipe(
+        map((data: any) => {
+          return new Auth.LoginSuccess(action.payload);
         }),
         catchError(() => of(new Auth.LoginFailed({ error: 'Something went wrong' })))
       )
